@@ -3,13 +3,14 @@ package application;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.Color;
 
 public class UI {
 
-	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
+
 
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -48,6 +49,13 @@ public class UI {
 		}
 	}
 	
+	public static void printMatch(ChessMatch chessMatch) {
+		printBoard(chessMatch.getPieces());
+		System.out.println();
+		System.out.println("Turn : " + chessMatch.getTurn());
+		System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+	}
+	
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + " ");
@@ -69,12 +77,12 @@ public class UI {
 		}
 		System.out.println("  a b c d e f g h");
 	}
-	
+
 	private static void printPiece(ChessPiece piece, boolean background) {
-    	if(background) {
-    		System.out.print(ANSI_BLUE_BACKGROUND);
-    	}
-		if (piece == null) {
+		if (background) {
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		}
+    	if (piece == null) {
             System.out.print("-" + ANSI_RESET);
         }
         else {
